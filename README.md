@@ -184,7 +184,18 @@ Hasil dari MSE menunjukan: <br/>
 Dan dapat disimpulkan bahwa model terbaik adalah KNN <br/>
 
 ### Prediksi 10 data random:
-![image](https://user-images.githubusercontent.com/121467356/219933798-2f75f809-f466-49ba-a793-fe1f2fb3b76c.png)
+| y_true    | prediksi_KNN | prediksi_RandomForest | prediksi_Boosting | prediksi_SVR |
+|-----------|--------------|-----------------------|-------------------|--------------|
+| 850830.0  | 573880.0     | 300170.0              | 516262.3          | 465155.5     |
+| 1395000.0 | 963880.0     | 2673825.0             | 2182777.3         | 465155.5     |
+| 290000.0  | 573880.0     | 349634.5              | 516262.3          | 465155.5     |
+| 345000.0  | 573880.0     | 300170.0              | 516262.3          | 465155.5     |
+| 334500.0  | 573880.0     | 295160.0              | 516262.3          | 465155.5     |
+| 379950.0  | 573880.0     | 360902.7              | 516262.3          | 465155.5     |
+| 464000.0  | 573880.0     | 2529958.4             | 2182777.3         | 465155.5     |
+| 499950.0  | 573880.0     | 300170.0              | 516262.3          | 465155.5     |
+| 487250.0  | 573880.0     | 300170.0              | 516262.3          | 465155.5     |
+| 380000.0  | 573880.0     | 633553.7              | 516262.3          | 465155.5     |
 
 ## Kesimpulan
 _Machine learning_ dapat diandalkan untuk menjadi jawaban tentang masalah prediksi harga rumah ini. Setelah melakukan pemodelan untuk data dan melatih data dengan algoritma SVM, KNN, AdaBoost, dan Random forest didapatkan bahwa model yang menggunakan algrotima KNN memiliki tingkat eror yang paling kecil.
