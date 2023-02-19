@@ -4,7 +4,7 @@
 
 Rumah sebagai tempat tinggal adalah salah satu kebutuhan pokok manusia selain pakaian dan makanan. Setiap manusia membutuhkan rumah untuk tempat berlindung dan sebagai tempat berkumpul dan berlangsungnya aktivitas keluarga, sekaligus sebagai sarana investasi. Menentukan harga jual rumah bisa menjadi tugas yang sulit dan memerlukan beberapa pertimbangan. Beberapa fitur seperti luas rumah, luas tanah, kondisi rumah, letak rumah, dll dapat membuat bingung bagi pemilik rumah yang masih awam dan bingung untuk menjual rumahnya di harga tertentu.
 
-Berlandaskan dari masalah ini, kita dapat menggatasinya dengan menggunakan algoritma machine learning. Supervised learning solusinya, kita dapat menggunakan dataset rumah berdasarkan fitur-fiturnya yang telah dilabeli dengan harga yang pantas untuk membuat model yang sesuai. Dengan ini, diharapkan masalah tentang kesulitan menentukan harga rumah dapat diatasi dengan model machine learning kita.
+Berlandaskan dari masalah ini, kita dapat menggatasinya dengan menggunakan algoritma machine learning. Supervised learning solusinya, kita dapat menggunakan dataset rumah berdasarkan fitur-fiturnya yang telah dilabeli dengan harga yang pantas untuk membuat model yang sesuai. Dengan ini, diharapkan masalah tentang kesulitan menentukan harga rumah dapat diatasi dengan model _machine learning_ kita.
 
 ## Business Understanding
 
@@ -50,9 +50,13 @@ Dataset yang digunakan adalah dataset House Price Prediction yang didapatkan dar
 
 ### EDA - Handling Outliers:
 Berdasarkan visualisasi boxplot, terdapat beberapa outliers di fitur: <br/>
+- Numerical Feature: Price <br/>
 ![Price](image/price.png) <br/>
+- Numerical Feature: sqft_above <br/>
 ![sqft_above](image/sqft_above.png) <br/>
+- Numerical Feature: sqft_basement <br/>
 ![sqft_basement](image/sqft_basement.png) <br/>
+- Numerical Feature: sqft_living <br/>
 ![sqft_living](image/sqft_living.png) <br/>
 
 untuk mengatasi itu, akan dilakukan penghapusan outliers dengan teknik IQR
@@ -60,21 +64,36 @@ untuk mengatasi itu, akan dilakukan penghapusan outliers dengan teknik IQR
 ### EDA - Univariate Analysis
 - Categorical Feature:<br/>
 ![street feature](https://user-images.githubusercontent.com/121467356/219909933-8aad6456-26d3-40b4-8053-7afea66d9877.png) <br/>
+Berdasarkan informasi pada gambar, data kategorik street memiliki unique feature yang sangat banyak, yaitu 4525. Untuk mengatasi hal itu, akan diputuskan untuk menghapus / drop feature street. <br/>
 ![city_feature](https://user-images.githubusercontent.com/121467356/219909966-448ae0c3-aba9-4fa3-b5e0-cd11e77dc8a1.png) <br/>
+Berdasarkan informasi pada gambar, data kategorik city memiliki 45 unique value. Jumlah sampel terbanyak terdapat pada Kota Seattle dengan presentase sebanyak 34.2% dari keseluruhan data. <br/>
 
 - Numerical Feature:<br/>
 ![numerical_univariate](https://user-images.githubusercontent.com/121467356/219910028-36b58db5-ea03-41b2-a656-5d06df64c852.png) <br/>
+Berdasarkan visualisasi, dapat disimpulkan bahwa price yang menjadi fitur target kita terletak pada rentang harga $0 - %5000000 USD 
 
 ### EDA - Multivariate Analyis
-- Categorical Feature terhadap price:<br/>
+#### Categorical Feature terhadap price:<br/>
+- Variabel city terhadap price: <br/>
 ![city-terhadap-price](https://user-images.githubusercontent.com/121467356/219910525-c49d7435-f8a6-4980-b317-db928f7a0cb0.png) <br/>
-- Numerical Feature:<br/>
+Berdasarkan visualisasi, dapat disimpulkan bahwa rumah yang berada di kota Seattle memiliki rata-rata harga tertinggi, yaitu sekitar $2000000 USD <br/>
+
+#### Numerical Feature:<br/>
 ![numerical_pairplot](https://user-images.githubusercontent.com/121467356/219911258-1d391b28-adf0-4c5e-b25e-554c2f43a002.png) <br/>
-- Correlation Matric:<br/>
+Berdasarkan pairplot antara numerikal fitur target price dengan yang lain, dapat disimpulkan: <br/>
+1. Rumah yang baru saja direnovasi berpengaruh dengan kenaikan harga, walaupun tidak signfikan <br/>
+2. Rumah yang memiliki umur muda memiliki harga yang lebih tinggi <br/>
+3. Harga memiliki korelasi dengan luas wilayah rumah <br/>
+4. Fitur bedrooms, bathrooms, floors, waterfront, view, condition kurang berpengaruh dengan harga. <br/>
+
+#### Correlation Matrix: <br/>
 ![correlation_matrix](https://user-images.githubusercontent.com/121467356/219911995-eedba18f-3440-47d2-805a-67cae55efac9.png) <br/>
+Berdasarkan correlation matrix, dapat disimpulkan: <br/>
+- variabel price memiliki korelasi yang cukup kuat dengan sqft_living dan sqft_above
+- variabel sqft_living memiliki korelasi yang kuat dengan sqft_above sehingga dapat dilakukan teknik dimensional reduction.
 
 ## Data Preparation
-Pada data preparation, hal yang saya lakukan adalah:
+Pada data preparation, hal yang dilakukan adalah:
 1. One Hot Encoding untuk fitur kategorik
 2. Reduksi dimensi dengan PCA, karena diketahui bahwa korelasi antara sqft_above dan sqft_living cukup tinggi, dan dapat dilihat dengan pairplot <br/>
 ![pairplot](https://user-images.githubusercontent.com/121467356/219914867-8d224c72-e58b-4514-90c7-8efd50af93a8.png)
@@ -82,7 +101,7 @@ Pada data preparation, hal yang saya lakukan adalah:
 ![train_test_split](https://user-images.githubusercontent.com/121467356/219915174-589011e3-205d-48bf-a56e-87f1af77321c.png)
 
 ## Modeling
-Pada saat modeling, saya menggunakan 4 algoritma: Support Vector Machine, K-Nearest Neighboor, Random Forest, AdaBoosting
+Pada saat modeling, saya menggunakan 4 algoritma: Support Vector Machine, K-Nearest Neighboor, Random Forest, AdaBoosting. Saya menggunakan default parameter, dan tidak menggunakan hyperparameter tuning di semua aloritma.
 
 ### SVM <br/>
 SVM (Support Vector Machine) adalah salah satu jenis algoritma pembelajaran mesin yang digunakan untuk tugas klasifikasi dan regresi. SVM dapat digunakan untuk menemukan batas keputusan yang optimal untuk memisahkan dua kelas data dengan membangun sebuah hiperplane atau permukaan pemisah dengan jarak maksimum ke kelas-kelas data yang berbeda. <br/>
@@ -157,9 +176,15 @@ Untuk mengukur seberapa baik model, karena ini adalah masalah regresi, saya memu
 ### Mean Squared Error (MSE)
 Mean squared error (MSE) adalah salah satu ukuran kesalahan yang digunakan dalam statistik dan machine learning untuk mengevaluasi seberapa baik model regresi memprediksi nilai target. MSE menghitung rata-rata kuadrat perbedaan antara nilai prediksi dan nilai sebenarnya dari variabel target. <br/>
 Secara matematis, MSE dihitung dengan mengambil selisih antara nilai sebenarnya dan nilai prediksi, mengkuadratkannya, menjumlahkan hasilnya, dan kemudian membagi jumlah ini dengan jumlah sampel. Lebih formalnya, jika kita memiliki n sampel dengan nilai sebenarnya y_i dan nilai prediksi ŷ_i, maka MSE dapat dihitung sebagai berikut: <br/>
-![MSE](https://user-images.githubusercontent.com/121467356/219922607-bd7a832f-7fb7-42e1-8bfe-b04c1fe5824b.png)
+![MSE](https://user-images.githubusercontent.com/121467356/219922607-bd7a832f-7fb7-42e1-8bfe-b04c1fe5824b.png) <br/>
 Semakin kecil nilai MSE, semakin baik model regresi tersebut memprediksi nilai target. Namun, MSE tidak selalu cocok untuk digunakan dalam semua situasi, misalnya ketika terdapat banyak outlier dalam data.
 
 Hasil dari MSE menunjukan: <br/>
 ![MSE](https://user-images.githubusercontent.com/121467356/219922628-632fb449-2248-4440-96d6-e74e14b93a7a.png) <br/>
-Dan dapat disimpulkan bahwa model terbaik adalah KNN
+Dan dapat disimpulkan bahwa model terbaik adalah KNN <br/>
+
+### Prediksi 10 data random:
+![image](https://user-images.githubusercontent.com/121467356/219933798-2f75f809-f466-49ba-a793-fe1f2fb3b76c.png)
+
+## Kesimpulan
+_Machine learning_ dapat diandalkan untuk menjadi jawaban tentang masalah prediksi harga rumah ini. Setelah melakukan pemodelan untuk data dan melatih data dengan algoritma SVM, KNN, AdaBoost, dan Random forest didapatkan bahwa model yang menggunakan algrotima KNN memiliki tingkat eror yang paling kecil.
