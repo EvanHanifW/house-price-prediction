@@ -49,6 +49,8 @@ Dataset yang digunakan adalah dataset House Price Prediction yang didapatkan dar
 - city: Merepresentasikan kota letak rumah
 
 ### EDA - Handling Outliers:
+Berdasarkan visualisasi boxplot, terdapat beberapa outliers di fitur:
+![Price](images/price.png)
 
 
 ## Data Preparation
