@@ -107,6 +107,19 @@ Pada saat modeling, saya menggunakan 4 algoritma: Support Vector Machine, K-Near
 SVM (Support Vector Machine) adalah salah satu jenis algoritma pembelajaran mesin yang digunakan untuk tugas klasifikasi dan regresi. SVM dapat digunakan untuk menemukan batas keputusan yang optimal untuk memisahkan dua kelas data dengan membangun sebuah hiperplane atau permukaan pemisah dengan jarak maksimum ke kelas-kelas data yang berbeda. <br/>
 Pada dasarnya, SVM mencoba untuk menemukan hiperplane terbaik yang membagi data ke dalam dua kelas sehingga jarak antara hiperplane dan setiap kelas data terdekat adalah maksimum. SVM juga dapat digunakan untuk memproyeksikan data ke dalam ruang dimensi yang lebih tinggi sehingga data yang tidak terpisahkan pada ruang dimensi rendah dapat dibagi secara efektif pada ruang dimensi yang lebih tinggi. SVM adalah algoritma yang sangat populer dan memiliki banyak aplikasi di berbagai bidang seperti pengolahan citra, analisis biomedis, klasifikasi teks, dan lain-lain. <br/>
 
+Parameter: <br/>
+- kernel: 'rbf'
+- degree: 3
+- gamma: 'scale'
+- coef0: 0.0
+- tol: 1e-3
+- C: 1.0
+- epsilon: 0.1
+- shrinking: True
+- cache_sizq: 200
+- verbose: False
+- max_iter: -1 <br/>
+
 Kelebihan: <br/>
 1. SVM sangat efektif dalam menangani dataset dengan dimensi yang tinggi, terutama dalam kasus di mana jumlah fitur melebihi jumlah sampel.
 2. SVM memberikan hasil yang sangat akurat dalam tugas klasifikasi, terutama ketika kelas data terpisah dengan baik.
@@ -126,6 +139,16 @@ KNN atau K-Nearest Neighbors adalah sebuah algoritma dalam machine learning yang
 Dalam konteks klasifikasi, KNN mencari K tetangga terdekat dari data yang ingin diklasifikasikan dan menentukan label yang paling sering muncul di antara tetangga tersebut sebagai label untuk data tersebut. Sedangkan dalam konteks regresi, KNN mencari K tetangga terdekat dari data yang ingin diprediksi dan menentukan nilai rata-rata dari nilai tetangga terdekat sebagai nilai prediksi untuk data tersebut. <br/>
 KNN membutuhkan pengukuran jarak antara setiap data yang ada dalam dataset, dan biasanya menggunakan Euclidean distance sebagai metrik jarak. KNN merupakan algoritma yang sederhana dan mudah dipahami, namun performanya dapat dipengaruhi oleh pemilihan nilai K dan metrik jarak yang digunakan. <br/>
 
+Parameter: <br/>
+- n_neighbors: 5
+- weights: 'uniform'
+- algorithm: 'auto'
+- leaf_size: 30
+- p: 2
+- metric: 'minkowski'
+- metric_params: None
+- n_jobs: None <br/>
+
 Kelebihan: <br/>
 1. Sederhana dan mudah dipahami: KNN termasuk algoritma yang mudah dimengerti karena hanya menghitung jarak antar data dan memilih label yang paling sering muncul pada tetangga terdekat.
 2. Non-parametrik: KNN tidak memiliki asumsi tentang distribusi data dan tidak memerlukan estimasi parameter, sehingga dapat digunakan pada data non-linear.
@@ -143,6 +166,15 @@ Random forest adalah salah satu jenis algoritma pembelajaran mesin yang digunaka
 Random forest bekerja dengan membuat beberapa pohon keputusan secara acak, di mana setiap pohon dibangun dengan memilih sampel acak dari dataset training dan juga dengan memilih subset acak dari fitur-fitur yang tersedia. Kemudian, hasil dari setiap pohon dijumlahkan dan diambil rata-ratanya untuk menghasilkan prediksi akhir. <br/>
 Salah satu keuntungan dari random forest adalah kehandalannya dalam menangani masalah overfitting dan data yang noisy. Selain itu, random forest juga dapat menghasilkan fitur penting (feature importance) yang berguna dalam pemahaman terhadap data dan fitur-fiturnya. Random forest banyak digunakan dalam berbagai aplikasi seperti pengenalan citra, pengolahan bahasa alami, dan analisis keuangan. <br/>
 
+Parameter: <br/>
+- n_estimators: 100
+- criterion: 'squared_error'
+- max_depth: None
+- min_samples_split: 2
+- min_samples_leaf: 1
+- min_weight_fraction_leaf: 0.0
+- max_features: 1.0 <br/>
+
 Kelebihan:
 1. Akurasi yang Tinggi: Random Forest biasanya menghasilkan prediksi yang sangat akurat karena dapat menangani klasifikasi multi-kelas dan dataset yang berukuran besar.
 2. Stabil pada Data yang Noisy: Algoritma ini stabil pada data yang noisy karena secara acak memilih sampel dan fitur dari dataset saat membangun setiap pohon keputusan.
@@ -159,6 +191,14 @@ Kekurangan:
 Adaptive Boosting, juga dikenal sebagai "AdaBoost", adalah salah satu algoritma pembelajaran mesin yang populer untuk masalah klasifikasi dan regresi. Algoritma ini memperbarui bobot setiap sampel latihan secara iteratif, di mana sampel yang sulit diklasifikasikan diberi bobot lebih tinggi dan sampel yang mudah diklasifikasikan diberi bobot lebih rendah. <br/>
 Dalam setiap iterasi, algoritma menghasilkan model kecil yang mengambil sampel yang diberi bobot tinggi. Model ini kemudian digunakan untuk memprediksi label pada setiap sampel latihan. Kemudian, algoritma menghitung kesalahan prediksi dan memperbarui bobot sampel latihan berdasarkan kesalahan tersebut. Proses ini diulang beberapa kali, dan model-model kecil ini digabungkan untuk menghasilkan model akhir yang lebih kuat. <br/>
 Adaptive Boosting sangat efektif dalam mengatasi masalah overfitting dan bias, karena model-model kecil yang dihasilkan hanya memeriksa subset dari seluruh fitur, dan karena bobot diatur ulang pada setiap iterasi. Algoritma ini telah digunakan dalam berbagai aplikasi, termasuk pengenalan wajah, deteksi objek, dan klasifikasi teks. <br/>
+
+Parameter:
+- estimator: None
+- n_estimators: 50
+- learning_rate: 1.0
+- loss: 'linear'
+- random_state: None
+- base_estimator: None <br/>
 
 Kelebihan:
 1. Akurasi yang tinggi: AdaBoost sering menghasilkan akurasi yang lebih tinggi daripada algoritma pembelajaran mesin lainnya.
